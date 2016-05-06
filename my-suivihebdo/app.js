@@ -66,27 +66,3 @@ function KinveyInit($kinvey, $rootScope, $location, KINVEY_CONFIG) {
         }
     });
 };
-
-/*
-// Other way (as defined in kinvey Getting Started)
-app.constant('kinveyConfig', {
-    appKey: 'kid_Z13U8i_XMb',
-    appSecret: '80aad81e32ba438597bd447bff4de563'
-});
-app.run(['$kinvey', '$rootScope', '$location', 'kinveyConfig', function($kinvey, $rootScope, $location, kinveyConfig) {
-    
-  console.log("kinveyConfig", kinveyConfig);
-    $rootScope.$on('$locationChangeStart', function(event, newUrl) {
-        if (!kinveyInitialized) {
-            event.preventDefault(); // Stop the location change
-            // Initialize Kinvey
-            $kinvey.init(kinveyConfig).then(function() {
-                kinveyInitialized = true;
-                $location.path($location.url(newUrl).hash); // Go to the page
-            }, function(err) {
-                alert('Kinvey Ping Failed. Response: ' + err.description);
-            });
-        }
-    });
-}]);
-*/
