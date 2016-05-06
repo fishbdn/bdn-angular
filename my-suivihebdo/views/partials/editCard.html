@@ -4,8 +4,10 @@
     
     <div class="modal-header">
         <button type="button" class="close" ng-click="close()">&times;</button>
-        <h4 class="modal-title" ng-model="columnName">Edit : '{{columnName}} - {{card.title}}'</h4>
+        <h4 class="modal-title" ng-model="currentColumn">Edition : '{{currentColumn.name}} - {{currentCard.title}}'</h4>
     </div>
+
+
     
     <div class="modal-body">
         
@@ -13,7 +15,7 @@
             <label class="control-label" for="newCardTitle">Titre</label>
 
             <div>
-                <input type="text" id="newCardTitle" placeholder="Title on a card" ng-model="card.title" required
+                <input type="text" id="newCardTitle" placeholder="Title de la carte" ng-model="currentCard.title" required
                        focus-me class="cardInputs form-control" />
             </div>
         </div>
@@ -22,25 +24,77 @@
             <label class="control-label" for="newCardConsum">Conso.</label>
 
             <div>
-                <input type="text" id="newCardConsum" placeholder="Title on a consumssion" ng-model="card.consum"
-                       focus-me class="cardInputs form-control"/>
+                <input type="number" id="newCardConsum" placeholder="Charge (x0.25)" ng-model="currentCard.consum"
+                       step="0.25" class="cardInputs form-control"/>
             </div>
+        </div>
+
+         <div class="form-group">
+            <label>Tache projet</label>
+
+            <select class="form-control" ng-model="currentCard.task" >
+                <optgroup label="General">
+                    <option>Analyse - Chiffrage - Murissement</option>
+                    <option>Doc - Specs - Conception</option>
+                </optgroup>               
+                <optgroup label="Dev - Lot3">
+                    <option>Notifications de non-conformité - Reception de fichiers [RanSharing]</option>
+                    <option>Notification du respect de l’accord cadre Ransharing</option>
+                    <option>Notification du respect de l’accord cadre Ransharing - IHM Ecran de Gestion de Notif</option>
+                    <option>Notification du respect de l’accord cadre Curling</option>
+                    <option>Config. Infra  - Modification du temps de connexion à l'application</option>
+                    <option>IHM - Optimisation des performances (écran Consulter Fichier)</option>
+                    <option>IHM - Exports CSV</option>
+                    <option>IHM - Nouvel ecran de contrôle de suivi du process RS</option>
+                </optgroup>            
+                <optgroup label="TV - Lot3">
+                    <option>Recette - Redaction TV : Notifs de non conforimté en reception [RanSharing]</option>
+                    <option>Recette - Redaction TV : Notification du respect de l’accord cadre Ransharing</option>
+                    <option>Recette - Redaction TV : Notification du respect de l’accord cadre Curling</option>
+                    <option>Recette - Redaction TV : Config. Infra  - Modification du temps de connexion à l'application</option>
+                    <option>Recette - Redaction TV : IHM - Optimisation des performances (écran Consulter Fichier)</option>
+                    <option>Recette - Redaction TV : IHM - Exports CSV</option>
+                    <option>Recette - Redaction TV : IHM - Nouvel ecran de contrôle de suivi du process RS</option>
+                </optgroup>
+                <optgroup label="Recette - Lot3">
+                    <option>Recette : Notifs de non conformité en reception [RanSharing]</option>
+                    <option>Recette : Notification du respect de l’accord cadre Ransharing</option>
+                    <option>Recette : Notification du respect de l’accord cadre Curling</option>
+                    <option>Recette : Config. Infra  - Modification du temps de connexion à l'application</option>
+                    <option>Recette : IHM - Optimisation des performances (écran Consulter Fichier)</option>
+                    <option>Recette : IHM - Exports CSV</option>
+                    <option>Recette : IHM - Nouvel ecran de contrôle de suivi du process RS</option>
+                    <option>Enveloppe correctifs</option>
+                    <option>Enveloppe Pilotage : Suivi / Reu / RT</option>
+                    <option>QPM</option>
+                    <option>Exploitation : Mod Op install & M.E.P</option>
+                    <option>MPS / Garantie</option>
+                </optgroup>
+            </select>
         </div>
 
         <div class="form-group">
-            <label class="control-label" for="newCardDetails">Details, commentaires
-                <small>(optional)</small>
-            </label>
+            <label class="control-label" for="newCardDetails">Details <small>(optional)</small></label>
 
             <div>
-                <textarea id="newCardDetails" ng-model="card.details" class="cardInputs form-control" rows="7">
+                <textarea id="newCardDetails" ng-model="currentCard.details" 
+                    class="cardInputs form-control" rows="5" placeholder="Détails, commentaires...">
                 </textarea>
             </div>
-        </div>
+        </div> 
+
     </div>
 
+
+
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" ng-click="close()">Close</button>
-        <button type="submit" class="btn btn-primary">Add</button>
+        <!-- <button type="button" class="btn btn-default" ng-click="close()">Close</button> -->
+        <!-- <button type="submit" class="btn btn-primary">Add</button> -->
+        <button type="submit" class="btn btn-primary">OK</button>
     </div>
+
+    <pre>{{currentCard}}</pre>
 </form>
+
+
+
