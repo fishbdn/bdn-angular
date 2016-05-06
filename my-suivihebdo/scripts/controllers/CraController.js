@@ -3,7 +3,9 @@
 
 'use strict';
 
-angular.module('demoApp').controller('CraController', ['$scope', '$kinvey', 'BoardService', 'BoardDataFactory', function ($scope, $kinvey, BoardService, BoardDataFactory) {
+angular.module('demoApp').controller('CraController', 
+  ['$scope', '$http', '$kinvey', 'BoardService', 'BoardDataFactory', 'notify', 
+  function ($scope, $http, $kinvey, BoardService, BoardDataFactory, notify) {
 
 
   // -------- Load Data -------------- //
@@ -32,7 +34,7 @@ angular.module('demoApp').controller('CraController', ['$scope', '$kinvey', 'Boa
     console.log('!!! cra_user sign-up failed !');
   });
   */
-  var promise = $kinvey.DataStore.get('weekBoard', '572b90ca600943704c60750e');
+  var promise = $kinvey.DataStore.get('weekBoard', '572cd61596a5494a25f074c7');
   promise.then(function(model) {
       // console.log("Kinvey GET : ", model);
       $scope.weekBoard = model;
@@ -41,6 +43,17 @@ angular.module('demoApp').controller('CraController', ['$scope', '$kinvey', 'Boa
   });
 
   // console.log($scope.weekBoard);
+
+  // ---> Loading Mio Tasks
+  $http.get('mioTaches.json').success(function(data) {
+    var mioTasks = { data };
+    console.log('mioTasks',  mioTasks);
+
+    $scope.mioTasks = mioTasks;
+    console.log('$scope.mioTasks',  $scope.mioTasks);
+  });
+
+
   
   // ---- ng-Sortable board config ------- //
   
@@ -69,8 +82,26 @@ angular.module('demoApp').controller('CraController', ['$scope', '$kinvey', 'Boa
   }
 
   $scope.editCard = function (column, card) {
-    console.log("Edit card : "  + column.name)
+    console.log("Edit card : "  + column.name);
     BoardService.editCard($scope.weekBoard, column, card);
+  }
+
+  $scope.saveWeekBoard = function (weekBoard) {
+    console.log("Save WeekBoard : ", weekBoard);
+    // BoardService.saveWeekBoard($scope.weekBoard);
+
+    // $kinvey.DataStore.update('weekBoard', weekBoard); 
+
+
+    var promise = Kinvey.DataStore.save('weekBoard', weekBoard);
+    promise.then(function(entity) {
+        console.log("WeekBoard saved");
+        notify('Week board sauvegardé !');
+    }, function(error) {
+        console.log("! WeekBoard not saved", error);
+        notify('Erreur de sauvegardé :' + error);
+    });
+
   }
 
   // **********************************************/

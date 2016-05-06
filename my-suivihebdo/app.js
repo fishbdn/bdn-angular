@@ -11,6 +11,7 @@ var app = angular.module('demoApp', [
     'ngRoute',
     'as.sortable',
     'ui.bootstrap',
+    'cgNotify',
     'kinvey', 
     'api_keys'
   ])
