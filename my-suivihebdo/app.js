@@ -4,19 +4,23 @@
 
 'use strict';
 
+var kinveyInitialized = false;
+
 // Declare app level module which depends on other modules
-angular.module('demoApp', [
+var app = angular.module('demoApp', [
     'ngRoute',
     'as.sortable',
-    'ui.bootstrap'
-  ]).
-  config(['$compileProvider', function ($compileProvider) {
+    'ui.bootstrap',
+    'kinvey', 
+    'api_keys'
+  ])
+  .config(['$compileProvider', function ($compileProvider) {
     $compileProvider.debugInfoEnabled(false); // testing issue #144
-  }]).
-  config(['$routeProvider', function ($routeProvider) {
+  }])
+  // Routes configuration
+  .config(['$routeProvider', function ($routeProvider) {
     //$routeProvider.when('/', {templateUrl: 'views/kanban.html'});
     $routeProvider.when('/cra', {templateUrl: 'views/cra.html', controller: 'CraController'});
-    
     $routeProvider.when('/kanban', {templateUrl: 'views/kanban.html', controller: 'KanbanController'});
     $routeProvider.when('/sprint', {templateUrl: 'views/sprint.html', controller: 'SprintController'});
     $routeProvider.when('/clone', { templateUrl: 'views/clone.html', controller: 'CloneController' });
@@ -27,8 +31,9 @@ angular.module('demoApp', [
     $routeProvider.when('/scrollable', {templateUrl: 'views/scrollable.html', controller: 'ScrollableController'});
     $routeProvider.when('/table', {templateUrl: 'views/table.html', controller: 'TableController'});
     $routeProvider.otherwise({redirectTo: '/kanban'});
-  }]).
-  controller('DemoController', ['$scope', '$location', function ($scope, $location) {
+  }])
+  // Application Controller
+  .controller('AppController', ['$scope', '$location', '$kinvey', function ($scope, $location, $kinvey) {
     $scope.isActive = function (viewLocation) {
       var active = false;
       if ($location.$$path.lastIndexOf(viewLocation, 0) != -1) {
@@ -36,6 +41,52 @@ angular.module('demoApp', [
       }
       return active;
     };
+  }]
+);
 
-  }]);
+// Kinvey (DataStore) initialisation
+app.run(KinveyInit);
 
+KinveyInit.$inject = ['$kinvey', '$rootScope', '$location', 'KINVEY_CONFIG'];
+function KinveyInit($kinvey, $rootScope, $location, KINVEY_CONFIG) {
+  console.log("Kinvey intitialize : ", KINVEY_CONFIG);
+
+    $rootScope.$on('$locationChangeStart', function(event, newUrl) {
+        
+        if (!kinveyInitialized) {
+            event.preventDefault(); // Stop the location change
+            
+            // Initialize Kinvey
+            $kinvey.init(KINVEY_CONFIG).then(function() {
+                kinveyInitialized = true;
+                $location.path($location.url(newUrl).hash); // Go to the page
+            }, function(err) {
+                alert('Kinvey Ping Failed. Response: ' + err.description);
+            });
+        }
+    });
+};
+
+/*
+// Other way (as defined in kinvey Getting Started)
+app.constant('kinveyConfig', {
+    appKey: 'kid_Z13U8i_XMb',
+    appSecret: '80aad81e32ba438597bd447bff4de563'
+});
+app.run(['$kinvey', '$rootScope', '$location', 'kinveyConfig', function($kinvey, $rootScope, $location, kinveyConfig) {
+    
+  console.log("kinveyConfig", kinveyConfig);
+    $rootScope.$on('$locationChangeStart', function(event, newUrl) {
+        if (!kinveyInitialized) {
+            event.preventDefault(); // Stop the location change
+            // Initialize Kinvey
+            $kinvey.init(kinveyConfig).then(function() {
+                kinveyInitialized = true;
+                $location.path($location.url(newUrl).hash); // Go to the page
+            }, function(err) {
+                alert('Kinvey Ping Failed. Response: ' + err.description);
+            });
+        }
+    });
+}]);
+*/

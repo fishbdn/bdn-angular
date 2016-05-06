@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="kinveyPing">
+<head>
+  <meta charset="utf-8">
+  <title>kinveyPing</title>
+
+
+    <!--styles -->
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-css-only/css/bootstrap.min.css">
+
+
+    <!--scripts-->
+    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="//da189i1jfloii.cloudfront.net/js/kinvey-angular-1.6.9.min.js"></script>
+
+</head>
+<body>
+
+  <div class="container" ng-controller="PingCtrl as ctrl">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <button class="btn btn-primary btn-lg" ng-click="ctrl.ping()">Ping Kinvey</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    angular.module('kinveyPing', ['kinvey', 'api_keys'])
+      .run(KinveyInit)
+      .controller('PingCtrl', PingCtrl);
+
+    KinveyInit.$inject = ['$kinvey', 'KINVEY_CONFIG'];
+    function KinveyInit($kinvey, KINVEY_CONFIG) {
+      $kinvey.init({
+        appKey    : KINVEY_CONFIG.appKey,
+        appSecret : KINVEY_CONFIG.appSecret
+      });
+    }
+
+    PingCtrl.$inject = ['$kinvey'];
+    function PingCtrl($kinvey) {
+      var vm = this;
+      this.ping = function() {
+        var promise = $kinvey.ping();
+        promise.then(function(response) {
+          alert('Kinvey Ping Success. Kinvey Service is alive, version: ' + response.version + ', response: ' + response.kinvey);
+        }, function(error) {
+          alert('Kinvey Ping Failed. Response: ' + error.description);
+        });
+      }
+    }
+  </script>
+  <script src="api_keys.js"></script>
+
+</body>
+</html>
