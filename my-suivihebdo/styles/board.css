@@ -39,7 +39,7 @@
 #board .table thead th {
     text-align: center;
     background: #fafafa linear-gradient(to bottom, #ffffff, #f2f2f2) repeat-x;
-    padding: 5px 0;
+    /*padding: 5px 0;*/
     font-size: 20px;
     font-weight: normal;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
@@ -190,8 +190,21 @@ div.task h3 {
 
 .addNewCard {
     float: right;
-    padding-right: 30px;
+    /*padding-right: 30px;*/
     color:  green;
+}
+
+.btnHeader-addCard {
+    float: right;
+    border-radius: 0px;
+    
+    background: #fafafa linear-gradient(to bottom, #ffffff, #f2f2f2) repeat-x;
+   /* margin-top: -5px;
+    margin-bottom: -5px; */
+    border-top: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-top-width: 0px;
 }
 
 .removeCard {
