@@ -3,9 +3,59 @@
 
 'use strict';
 
+
 angular.module('demoApp').service('BoardDataFactory', function () {
 
   return {
+
+    cra: {
+
+      "name": "Suivi activites",
+
+      "numberOfColumns": 5,
+
+      "columns": [
+        {"name": "Lundi", "cards": [
+          {"title": "TEST", "toto":"tata"},
+          {"title": "QPM lot2"},
+          {"title": "Scripts lot 2",
+            "details": "blabla",
+            "consum": "0.25"},
+          {"title": "MEP lot2",
+            "details": "ChangeRequest, reu passage en CAB, livrables ",
+            "consum": "0.5"},
+          {"title": "Lot 3 - Dev perfs onglet consulter fichiers"}
+        ]},
+        {"name": "Mardi", "cards": [
+          {"title": "Explore new IDE for Development",
+            "details": "Testing Card Details"},
+          {"title": "Get new resource for new Project",
+            "details": "Testing Card Details"}
+        ]},
+        {"name": "Mercredi", "cards": [
+          {"title": "Develop ui for tracker module",
+            "details": "Testing Card Details"},
+          {"title": "Develop backend for plan module",
+            "details": "Testing Card Details"}
+        ]},
+        {"name": "Jeudi", "cards": [
+          {"title": "Test user module",
+            "details": "Testing Card Details"},
+          {"title": "End to End Testing for user group module",
+            "details": "Testing Card Details"},
+          {"title": "CI for user module",
+            "details": "Testing Card Details"}
+        ]},
+        {"name": "Vendredi", "cards": [
+          {"title": "Test user module",
+            "details": "Testing Card Details"},
+          {"title": "End to End Testing for user group module",
+            "details": "Testing Card Details"},
+          {"title": "CI for user module",
+            "details": "Testing Card Details"}
+        ]}
+      ]
+    },
     kanban: {
       "name": "Kanban Board",
       "numberOfColumns": 4,

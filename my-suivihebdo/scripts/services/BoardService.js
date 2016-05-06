@@ -6,6 +6,7 @@
 angular.module('demoApp').service('BoardService', ['$uibModal', 'BoardManipulator', function ($uibModal, BoardManipulator) {
 
   return {
+
     removeCard: function (board, column, card) {
       if (confirm('Are You sure to Delete?')) {
         BoardManipulator.removeCardFromColumn(board, column, card);
@@ -28,6 +29,40 @@ angular.module('demoApp').service('BoardService', ['$uibModal', 'BoardManipulato
           BoardManipulator.addCardToColumn(board, cardDetails.column, cardDetails.title, cardDetails.details);
         }
       });
+    },
+
+    editCard: function (board, column, card) {
+      console.log("edit", column);
+      console.log("edit Card", card);
+      var modalInstance = $uibModal.open({
+        templateUrl: 'views/partials/editCard.html',
+        controller: 'EditCardController',
+        backdrop: 'static',
+        resolve: {
+          column: function () {
+            return column;
+          },
+          card: function () {
+            return card;
+          }
+        }
+      });
+      modalInstance.result.then(function (cardDetails) {
+        if (cardDetails) {
+          BoardManipulator.addCardToColumn(board, cardDetails.column, cardDetails.title, cardDetails.details);
+        }
+      });
+    },
+
+    weekBoard: function (board) {
+      var weekBoard = new Board(board.name, board.numberOfColumns);
+      angular.forEach(board.columns, function (column) {
+        BoardManipulator.addColumn(weekBoard, column.name);
+        angular.forEach(column.cards, function (card) {
+          BoardManipulator.addCardToColumn(weekBoard, column, card.title, card.details);
+        });
+      });
+      return weekBoard;
     },
     kanbanBoard: function (board) {
       var kanbanBoard = new Board(board.name, board.numberOfColumns);

@@ -179,6 +179,15 @@ div.task h3 {
     display: block;
 }
 
+.card-consum {
+    color: #D66B2A;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: 2px 1px;
+    display: block;
+}
+
 .addNewCard {
     float: right;
     padding-right: 30px;
@@ -186,6 +195,7 @@ div.task h3 {
 }
 
 .removeCard {
-    padding: 12px;
+    padding: 1px;
+    margin-right: 10px;
     color: #444;
 }

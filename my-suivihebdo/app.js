@@ -15,6 +15,8 @@ angular.module('demoApp', [
   }]).
   config(['$routeProvider', function ($routeProvider) {
     //$routeProvider.when('/', {templateUrl: 'views/kanban.html'});
+    $routeProvider.when('/cra', {templateUrl: 'views/cra.html', controller: 'CraController'});
+    
     $routeProvider.when('/kanban', {templateUrl: 'views/kanban.html', controller: 'KanbanController'});
     $routeProvider.when('/sprint', {templateUrl: 'views/sprint.html', controller: 'SprintController'});
     $routeProvider.when('/clone', { templateUrl: 'views/clone.html', controller: 'CloneController' });

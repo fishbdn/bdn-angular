@@ -1,0 +1,46 @@
+<!-- New Card template -->
+
+<form ng-submit="editCard()" class="noMargin" name="editCardForm">
+    
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="close()">&times;</button>
+        <h4 class="modal-title" ng-model="columnName">Edit : '{{columnName}} - {{card.title}}'</h4>
+    </div>
+    
+    <div class="modal-body">
+        
+        <div class="form-group">
+            <label class="control-label" for="newCardTitle">Titre</label>
+
+            <div>
+                <input type="text" id="newCardTitle" placeholder="Title on a card" ng-model="card.title" required
+                       focus-me class="cardInputs form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="newCardConsum">Conso.</label>
+
+            <div>
+                <input type="text" id="newCardConsum" placeholder="Title on a consumssion" ng-model="card.consum"
+                       focus-me class="cardInputs form-control"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="newCardDetails">Details, commentaires
+                <small>(optional)</small>
+            </label>
+
+            <div>
+                <textarea id="newCardDetails" ng-model="card.details" class="cardInputs form-control" rows="7">
+                </textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="close()">Close</button>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+</form>
