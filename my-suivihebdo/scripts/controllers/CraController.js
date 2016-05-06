@@ -22,8 +22,6 @@ angular.module('demoApp').controller('CraController', ['$scope', '$kinvey', 'Boa
     console.log('$scope.weekBoard',  $scope.weekBoard);
   });*/
 
-
-
   // ---> From External DataStore (Kinvey) 
   // If user authent asked !?
   /*
@@ -43,7 +41,6 @@ angular.module('demoApp').controller('CraController', ['$scope', '$kinvey', 'Boa
   });
 
   // console.log($scope.weekBoard);
-
   
   // ---- ng-Sortable board config ------- //
   
@@ -77,8 +74,6 @@ angular.module('demoApp').controller('CraController', ['$scope', '$kinvey', 'Boa
   }
 
   // **********************************************/
-
-
 
 }]);
 
