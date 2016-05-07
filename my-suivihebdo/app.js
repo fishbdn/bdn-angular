@@ -13,7 +13,8 @@ var app = angular.module('demoApp', [
     'ui.bootstrap',
     'cgNotify',
     'kinvey', 
-    'api_keys'
+    'api_keys',
+    'chart.js'
   ])
   .config(['$compileProvider', function ($compileProvider) {
     $compileProvider.debugInfoEnabled(false); // testing issue #144
@@ -22,6 +23,8 @@ var app = angular.module('demoApp', [
   .config(['$routeProvider', function ($routeProvider) {
     //$routeProvider.when('/', {templateUrl: 'views/kanban.html'});
     $routeProvider.when('/cra', {templateUrl: 'views/cra.html', controller: 'CraController'});
+    $routeProvider.when('/cra-graph', {templateUrl: 'views/cra-graph.html', controller: 'StackedBarCtrl'});
+
     $routeProvider.when('/kanban', {templateUrl: 'views/kanban.html', controller: 'KanbanController'});
     $routeProvider.when('/sprint', {templateUrl: 'views/sprint.html', controller: 'SprintController'});
     $routeProvider.when('/clone', { templateUrl: 'views/clone.html', controller: 'CloneController' });
@@ -31,7 +34,7 @@ var app = angular.module('demoApp', [
     $routeProvider.when('/block', {templateUrl: 'views/block.html', controller: 'BlockController'});
     $routeProvider.when('/scrollable', {templateUrl: 'views/scrollable.html', controller: 'ScrollableController'});
     $routeProvider.when('/table', {templateUrl: 'views/table.html', controller: 'TableController'});
-    $routeProvider.otherwise({redirectTo: '/kanban'});
+    $routeProvider.otherwise({redirectTo: '/cra'});
   }])
   // Application Controller
   .controller('AppController', ['$scope', '$location', '$kinvey', function ($scope, $location, $kinvey) {
@@ -67,3 +70,21 @@ function KinveyInit($kinvey, $rootScope, $location, KINVEY_CONFIG) {
         }
     });
 };
+
+// Angular Chart.js configuration
+app.config(function (ChartJsProvider) {
+  // Configure all charts
+  ChartJsProvider.setOptions({
+    colours: ['#97BBCD', '#DCDCDC', '#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
+    responsive: true
+  });
+  // Configure all doughnut charts
+  ChartJsProvider.setOptions('Doughnut', {
+    animateScale: true
+  });
+});
+/*
+(function (ChartJsProvider) {
+  ChartJsProvider.setOptions({ colours : [ '#803690', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] });
+}); 
+*/

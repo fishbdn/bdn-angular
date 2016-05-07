@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="styles/board.css">
     <link rel="stylesheet" type="text/css" href="styles/app.css">
     <link rel="stylesheet" type="text/css" href="styles/scrollableContainer.css">
+
+    <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css">
     
     <!--scripts - libraries -->
     <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
@@ -23,6 +25,10 @@
     <!-- angular-notify -->
     <link rel="stylesheet" type="text/css" href="dist/angular-notify.min.css">
     <script type="text/javascript" src="dist/angular-notify.min.js"></script>
+
+    <script type="text/javascript" src="bower_components/Chart.js/Chart.js"></script>
+    <script type="text/javascript" src="bower_components/Chart.StackedBar.js/src/Chart.StackedBar.js"></script>
+    <script type="text/javascript" src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
 
     <!--scripts - project -->
     <script type="text/javascript" src="model.js"></script>
@@ -43,16 +49,19 @@
     <script type="text/javascript" src="scripts/controllers/BlockController.js"></script>
     <script type="text/javascript" src="scripts/controllers/ScrollableController.js"></script>
     <script type="text/javascript" src="scripts/controllers/TableController.js"></script>
+
+    <script type="text/javascript" src="scripts/controllers/StackedBarCtrl.js"></script>
 </head>
 
 <body ng-app="demoApp">
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid" ng-controller="AppController">
         <div class="board-header">
             <ul class="nav nav-tabs nav-justified">
 
-                <li><a href="#/cra" ng-class="{active: isActive('/cra')}">Cra</a></li>
-
+                <li><a href="#/cra" ng-class="{active: isActive('/cra')}">CRA Hebdo</a></li>
+                <li><a href="#/cra-graph" ng-class="{active: isActive('/cra-graph')}">CRA-Graphs</a></li>
+<!-- 
                 <li><a href="#/kanban" ng-class="{active: isActive('/kanban')}">Simple</a></li>
                 <li><a href="#/sprint" ng-class="{active: isActive('/sprint')}">Advanced</a></li>
                 <li><a href="#/clone" ng-class="{active: isActive('/clone')}">Clone</a></li>
@@ -62,7 +71,7 @@
                 <li><a href="#/block" ng-class="{active: isActive('/block')}">Block</a></li>
                 <li><a href="#/scrollable" ng-class="{active: isActive('/scrollable')}">Scrollable</a></li>
                 <li><a href="#/table" ng-class="{active: isActive('/table')}">Table</a></li>
-
+ -->
             </ul>
         </div>
 

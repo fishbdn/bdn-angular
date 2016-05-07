@@ -1,0 +1,41 @@
+
+
+<div id="container" class="container" ng-controller="BarCtrl">
+
+<div class="row" >
+
+</div>
+
+<div class="row" >
+    <div class="col-lg-6 col-sm-12" ng-controller="BarCtrl">
+      <canvas id="bar" class="chart chart-bar"
+        chart-data="data" 
+        chart-labels="labels"
+        chart-series="series">
+      </canvas>
+    </div>
+
+    <div class="col-lg-6 col-sm-12" ng-controller="StackedBarCtrl">
+    <div class="panel panel-default">
+      <div class="panel-heading">Stacked Bar Chart</div>
+      <div class="panel-body">
+        <canvas class="chart chart-base" 
+          chart-type="type" 
+          chart-data="data" 
+          chart-labels="labels"
+          chart-series="series"
+          chart-legend="legend">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<script type="text/javascript" src="../bower_components/Chart.js/Chart.js"></script>
+<script type="text/javascript" src="../bower_components/Chart.StackedBar.js/src/Chart.StackedBar.js"></script>
+<script type="text/javascript" src="../bower_components/angular-chart.js/dist/angular-chart.js"></script>
+
