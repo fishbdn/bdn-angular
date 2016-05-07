@@ -1,5 +1,9 @@
 <div data-ng-model="cra" id="board" ng-controller="CraController as CraCtrl">
     
+        <div>
+            <button type="button" class="btn btn-primary" ng-click="saveWeekBoard(weekBoard)">Sauver</button>
+        </div>
+
     <div id="columns" class="row scrollable-container" >
         
         <!-- Week board Columns -->
@@ -18,7 +22,7 @@
                         </a>
                     </button>
                     
-                    <span>{{column.name}} ({{column.cards.length}})</span>
+                    <span>{{column.name}} ({{column.cards.length}}) <small>{{getSumColConsums(column)}}</small></span>
                 </div>
 
                 <ul class="cards card-list" as-sortable="weekSortOptions" data-ng-model="column.cards">
@@ -48,11 +52,11 @@
                             </div>
                             
                             <div class="row">
-                                <div class="col-sm-9">
+                                <div class="col-sm-6">
                                     <span class="card-consum" ng-if="card.consum > 0">{{card.consum}} j</span>
                                 </div>
 
-                                <div class="col-sm-1" style="padding-left: 2px;">
+                                <div class="col-sm-1 pull-right" style="margin-right:15px;">
                                     <span ng-if="card.task.length > 0" 
                                         class="card-title" 
                                         data-toggle="tooltip" title="{{card.task}}">
@@ -71,9 +75,8 @@
 
         </div>
 
-        <div>
-            <button type="button" class="btn btn-primary" ng-click="saveWeekBoard(weekBoard)">Sauver</button>
-        </div>
+        
     </div>
+
 
 </div>

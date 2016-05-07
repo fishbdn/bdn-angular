@@ -79,12 +79,12 @@ angular.module('demoApp').controller('CraController',
 
   $scope.addNewCard = function (column) {
     BoardService.addNewCard($scope.weekBoard, column);
-  }
+  };
 
   $scope.editCard = function (column, card) {
     console.log("Edit card : "  + column.name);
     BoardService.editCard($scope.weekBoard, column, card);
-  }
+  };
 
   $scope.saveWeekBoard = function (weekBoard) {
     console.log("Save WeekBoard : ", weekBoard);
@@ -102,7 +102,29 @@ angular.module('demoApp').controller('CraController',
         notify('Erreur de sauvegardé :' + error);
     });
 
-  }
+  };
+
+  $scope.editCard = function (column, card) {
+    
+    BoardService.editCard($scope.weekBoard, column, card);
+  };
+
+  $scope.getSumColConsums = function (column) {
+    console.log("Calcul sum column consumptions : "  + column.name);
+    if (angular.isDefined(column)) {
+
+      var sum = 0;
+
+      angular.forEach(column.cards, function(value, key) {
+        // console.log("sum", sum);
+        if (angular.isNumber(value.consum)) {
+          sum += value.consum;  
+        }
+
+      });
+      return sum;
+    }
+  };
 
   // **********************************************/
 
